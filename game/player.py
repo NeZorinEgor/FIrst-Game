@@ -2,7 +2,6 @@ from settings import *
 import pygame
 import math
 
-
 class Player:
     def __init__(self):
         self.x, self.y = player_pos
