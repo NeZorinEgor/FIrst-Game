@@ -15,4 +15,4 @@ def raycast(sc, player_pos, player_angle):
             pygame.draw.line(sc, RED, player_pos, (x, y), 2)
             if (x // BLOCK * BLOCK, y // BLOCK * BLOCK) in world_field:
                 break
-        cur_angle += DELTA_ANGLE
+        cur_angle += DELTA_ANGLE 
