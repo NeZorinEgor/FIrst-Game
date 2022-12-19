@@ -1,40 +1,40 @@
+import pygame as pg
 from settings import *
-import pygame
 import math
 
 
 class Player:
     def __init__(self):
-        self.x, self.y = player_pos
+        self.pos, self.ang = player_pos
         self.angle = player_angle
 
     @property
-    def pos(self):
-        return (self.x, self.y)
+    def get_position(self):
+        return (self.pos, self.ang)
 
-    def movement(self):
+    def moving(self):
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            self.x += movement_speed * cos_a
-            self.y += movement_speed * sin_a
+        keys = pg.key.get_pressed()
+        if keys[pg.K_w]:
+            self.pos += movement_speed * cos_a
+            self.ang += movement_speed * sin_a
             print("W")
-        if keys[pygame.K_s]:
-            self.x += -movement_speed * cos_a
-            self.y += -movement_speed * sin_a
-            print("S")
-        if keys[pygame.K_a]:
-            self.x += movement_speed * sin_a
-            self.y += -movement_speed * cos_a
+        if keys[pg.K_a]:
+            self.pos += movement_speed * sin_a
+            self.ang += -movement_speed * cos_a
             print("A")
-        if keys[pygame.K_d]:
-            self.x += -movement_speed * sin_a
-            self.y += movement_speed * cos_a
+        if keys[pg.K_s]:
+            self.pos += -movement_speed * cos_a
+            self.ang += -movement_speed * sin_a
+            print("S")
+        if keys[pg.K_d]:
+            self.pos += -movement_speed * sin_a
+            self.ang += movement_speed * cos_a
             print("D")
-        if keys[pygame.K_LEFT]:
+        if keys[pg.K_LEFT]:
             self.angle -= 0.02
             print("←")
-        if keys[pygame.K_RIGHT]:
+        if keys[pg.K_RIGHT]:
             self.angle += 0.02
             print("→")
