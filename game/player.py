@@ -37,4 +37,3 @@ class Player:
         if keys[pg.K_RIGHT]:
             self.angle += 0.02
             print("→")
-            
