@@ -1,4 +1,3 @@
-import math
 ####################
 
 WIDTH = 1600
@@ -28,8 +27,3 @@ GREEN = (0, 220, 0)
 BLUE = (0, 0, 255)
 LIGHTGRAY = (140, 140, 140)
 
-
-#Добавлено
-DISTANCE = NUM_RAYS / (2 * math.tan(HALF_FOV))
-PROJECTION_COEFFICIENT = 3 * DISTANCE * BLOCK
-FOV_SIZE = WIDTH // NUM_RAYS
