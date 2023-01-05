@@ -14,8 +14,7 @@ def raycast(sc, position, angle):
             y = yo + depth * sin_a
             # pygame.draw.line(sc, RED, player_pos, (x, y), 2)
             if (x // BLOCK * BLOCK, y // BLOCK * BLOCK) in world_field:
-
-                #Добавлено
+                
                 depth *= math.cos(angle - cur_angle)
                 projection_height = min(PROJECTION_COEFFICIENT / (depth + 0.0001), HEIGHT)
                 c = 255 / (1 + depth * depth * 0.0001)
@@ -23,4 +22,4 @@ def raycast(sc, position, angle):
                 pygame.draw.rect(sc, color, (ray * FOV_SIZE, HALF_HEIGHT - projection_height // 2, FOV_SIZE, projection_height))
                 break
             
-        cur_angle += DELTA_ANGLE 
+        cur_angle += DELTA_ANGLE  
