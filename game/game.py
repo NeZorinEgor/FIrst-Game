@@ -10,7 +10,10 @@ screen = pg.display.set_mode((WIDTH, HEIGHT))
 clock = pg.time.Clock()
 player = Player()
 running_game = True
-area = Area(screen)
+
+#Отрисовка местности
+screen_field = pg.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
+area = Area(screen, screen_field)
 
 while running_game:
     for event in pg.event.get():
@@ -36,7 +39,7 @@ while running_game:
     # for x,y in world_field:
     #     pg.draw.rect(screen, BLACK, (x, y, BLOCK, BLOCK), 2)
 
-    area.environment()
+    area.environment(player.angle)
     area.world(player.get_position, player.angle)
 
     pg.display.flip()
