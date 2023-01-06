@@ -2,7 +2,6 @@ import pygame
 from settings import *
 from raycast import raycast
 
-
 class Area:
     def __init__(self, screen, screen_field):
         self.screen = screen
