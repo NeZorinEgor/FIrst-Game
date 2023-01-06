@@ -6,15 +6,22 @@ class Player:
     def __init__(self):
         self.pos, self.ang = player_pos
         self.angle = player_angle
+        self.sensivity = 0.004
 
     @property
     def get_position(self):
         return (self.pos, self.ang)
+
+    def movement(self):
+        self.moving()
+        self.mouse_control()
+        self.angle %= DOUBLE_PI
     
     def moving(self):
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
         keys = pg.key.get_pressed()
+
         if keys[pg.K_w]:
             self.pos += movement_speed * cos_a
             self.ang += movement_speed * sin_a
@@ -37,3 +44,9 @@ class Player:
         if keys[pg.K_RIGHT]:
             self.angle += 0.02
             print("→")
+
+    def mouse_control(self):
+        if pg.mouse.get_focused():
+            difference = pg.mouse.get_pos()[0] - HALF_WIDTH
+            pg.mouse.set_pos((HALF_WIDTH, HALF_HEIGHT))
+            self.angle += difference * self.sensivity
