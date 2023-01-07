@@ -1,12 +1,12 @@
-import pygame as pg
 from settings import *
+import pygame as pg
 import math
 
 class Player:
     def __init__(self):
         self.pos, self.ang = PLAYER_POS
         self.angle = PLAYER_ANGLE
-        self.sensivity = 0.004
+        # self.sensivity = 0.004
 
     @property
     def get_position(self):
@@ -39,8 +39,10 @@ class Player:
             self.angle += 0.02
             print("→")
 
-    def mouse_control(self):
-        if pg.mouse.get_focused():
-            difference = pg.mouse.get_pos()[0] - HALF_WIDTH
-            pg.mouse.set_pos((HALF_WIDTH, HALF_HEIGHT))
-            self.angle += difference * self.sensivity 
+        self.angle %= DOUBLE_PI
+
+        # def mouse_control(self):
+        #     if pg.mouse.get_focused():
+        #         difference = pg.mouse.get_pos()[0] - HALF_WIDTH
+        #         pg.mouse.set_pos((HALF_WIDTH, HALF_HEIGHT))
+        #         self.angle += difference * self.sensivity
