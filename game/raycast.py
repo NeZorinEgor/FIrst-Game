@@ -6,10 +6,11 @@ EPS = 0.00001
 def mapping(a, b):
     return (a // BLOCK) * BLOCK, (b // BLOCK) * BLOCK
 
-def raycast(sc, position, angle, textures):
-    xo, yo = position
-    angle_relative_to_fov = angle - HALF_FOV
+def raycast(player, textures):
+    walls = []
+    xo, yo = player.get_position
     x_on_map, y_on_map = mapping(xo, yo)
+    angle_relative_to_fov = player.angle - HALF_FOV
     for rays in range(NUM_RAYS):
         sin_a = math.sin(angle_relative_to_fov)
         cos_a = math.cos(angle_relative_to_fov)
@@ -18,9 +19,9 @@ def raycast(sc, position, angle, textures):
         for i in range(0, WIDTH, BLOCK):
             depth_vertical = (x - xo) / cos_a
             y_vertical = yo + depth_vertical * sin_a
-            field_v = mapping(x + dx, y_vertical)
-            if field_v in world_field:
-                texture_v = world_field[field_v]
+            block_vertical = mapping(x + dx, y_vertical)
+            if block_vertical in world_field:
+                texture_vertical = world_field[block_vertical]
                 break
             x += dx * BLOCK
 
@@ -34,14 +35,16 @@ def raycast(sc, position, angle, textures):
                 break
             y += dy * BLOCK
 
-        depth, offset, texture = (depth_vertical, y_vertical, texture_v) if depth_vertical < depth_horizontal else (depth_horizontal, x_horizontal, texture_horizontal)
-        offset = int(offset) % BLOCK
-        depth *= math.cos(angle - angle_relative_to_fov)
+        depth, displacement, texture = (depth_vertical, y_vertical, texture_vertical) if depth_vertical < depth_horizontal else (depth_horizontal, x_horizontal, texture_horizontal)
+        displacement = int(displacement) % BLOCK
+        depth *= math.cos(player.angle - angle_relative_to_fov)
         depth = max(depth, EPS)
         projection_height = min(int(PROJECTION_COEFFICIENT / depth), 2 * HEIGHT)
 
-        wall = textures[texture].subsurface(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT)
+        wall = textures[texture].subsurface(displacement * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT)
         wall = pygame.transform.scale(wall, (FOV_SIZE, projection_height))
-        sc.blit(wall, (rays * FOV_SIZE, HALF_HEIGHT - projection_height // 2))
+        wall_position = (rays * FOV_SIZE, HALF_HEIGHT - projection_height // 2)
 
+        walls.append((depth, wall, wall_position))
         angle_relative_to_fov += DELTA_ANGLE
+    return walls
