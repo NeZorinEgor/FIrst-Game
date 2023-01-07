@@ -11,6 +11,7 @@ pg.init()
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 clock = pg.time.Clock()
+pg.mouse.set_visible(False)
 player = Player()
 running_game = True
 
