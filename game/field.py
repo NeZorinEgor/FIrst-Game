@@ -1,6 +1,6 @@
 from settings import *
 
-text_map = [
+list_map = [
     '||||||||||||||||||||||||||||||||',
     '|..............................|',
     '|..............................|',
@@ -21,8 +21,9 @@ text_map = [
     '||||||||||||||||||||||||||||||||',
 ]
 
+
 world_field = {}
-for j, row in enumerate(text_map):
+for j, row in enumerate(list_map):
     for i, char in enumerate(row):
         if char == '|':
             world_field[(i * BLOCK, j * BLOCK)] = '|'
