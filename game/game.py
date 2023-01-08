@@ -10,10 +10,10 @@ class Game:
 
     def start_game():
         running_game = True
-        sc = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.mouse.set_visible(False)
+        sc = pg.display.set_mode((WIDTH, HEIGHT))
+        pg.mouse.set_visible(False)
         sprites = Sprites()
-        clock = pygame.time.Clock()
+        clock = pg.time.Clock()
         player = Player(sprites)
         drawing = Drawing(sc)
         Music.play_music()
@@ -34,6 +34,5 @@ class Game:
             drawing.world(walls + [obj.object_place(player)
                           for obj in sprites.list_of_objects])
 
-            pygame.display.flip()
+            pg.display.flip()
             clock.tick(FPS)
-
