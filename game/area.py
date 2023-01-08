@@ -1,18 +1,18 @@
 import pygame as pg
 from settings import *
 
-class Area:
-    def __init__(self, screen, screen_field):
+class Drawing:
+    def __init__(self, screen):
         self.screen = screen
-        self.screen_field = screen_field
-
-        self.textures = {'|': pg.image.load('images/texture1.png').convert(),
-                         'I': pg.image.load('images/texture2.png').convert(),
-                         'SKY': pg.image.load('images/skybox.jpg').convert()
+        self.textures = {1: pg.image.load('images/wall1.png').convert(),
+                         2: pg.image.load('images/wall2.png').convert(),
+                         3: pg.image.load('images/wall3.png').convert(),
+                         4: pg.image.load('images/wall4.png').convert(),
+                         'SKY': pg.image.load('images/sky.png').convert()
                          }
 
     def environment(self, angle):
-        sky_offset = -5 * math.degrees(angle) % WIDTH
+        sky_offset = -10 * math.degrees(angle) % WIDTH
         self.screen.blit(self.textures['SKY'], (sky_offset, 0))
         self.screen.blit(self.textures['SKY'], (sky_offset - WIDTH, 0))
         self.screen.blit(self.textures['SKY'], (sky_offset + WIDTH, 0))
