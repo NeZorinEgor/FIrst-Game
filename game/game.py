@@ -7,25 +7,25 @@ from area import Drawing
 from music import Music
 
 class Game:
+
     def start_game():
         running_game = True
         sc = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.mouse.set_visible(False)
-
         sprites = Sprites()
         clock = pygame.time.Clock()
         player = Player(sprites)
         drawing = Drawing(sc)
         Music.play_music()
 
-         while running_game:
+        while running_game:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_ESCAPE:
                         sys.exit()
-                        
+
             player.moving()
             sc.fill(WHITE)
 
@@ -36,3 +36,4 @@ class Game:
 
             pygame.display.flip()
             clock.tick(FPS)
+
