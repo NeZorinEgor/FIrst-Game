@@ -1,5 +1,5 @@
-import pygame
-from settings import *
+import sys
+import pygame as pg
 from player import Player
 from sprites import *
 from raycast import raycast
@@ -8,6 +8,7 @@ from music import Music
 
 class Game:
     def start_game():
+        running_game = True
         sc = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.mouse.set_visible(False)
 
@@ -17,10 +18,14 @@ class Game:
         drawing = Drawing(sc)
         Music.play_music()
 
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    exit()
+         while running_game:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_ESCAPE:
+                        sys.exit()
+                        
             player.moving()
             sc.fill(WHITE)
 
